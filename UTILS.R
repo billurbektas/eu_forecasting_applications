@@ -28,8 +28,8 @@ data_library <- function(data) {
       ),
       
       target_level = case_when(
-        grepl("Forecasting", project_type) ~ `Can you specify the level of what is being forecasted? (if applicable)`,
-        grepl("Modeling", project_type) ~ `Can you specify the level of what is being modeled? (if applicable)`,
+        grepl("Forecasting", project_type) ~ `Can you specify the level of what is being forecasted? (if applicable)\n(This would be the output of the model, e.g. population abundance from an IBM would be “Population-level”)`,
+        grepl("Modeling", project_type) ~ `Can you specify the level of what is being modeled? (if applicable)\n(This would be the output of the model, e.g. population abundance from an IBM would be “Population-level”)`,
         grepl("Observatory", project_type) ~ `Can you specify the level of what is being monitored? (if applicable)`,
         TRUE ~ NA_character_
       ),
@@ -83,7 +83,7 @@ data_library <- function(data) {
       # Use case
       use_case = case_when(
         grepl("Forecasting", project_type) ~ `Please provide an example use case for the forecasts (max 50 words). (e.g., use of forecasts to inform authorities, decision-making, conservation strategies, management)`,
-        grepl("Modeling", project_type) ~ `Please provide an example use case for a potential forecasting application (max 50 words). (e.g., use of forecasts to inform authorities, decision-making, conservation strategies, management)`,
+        grepl("Modeling", project_type) ~ `Please provide an example use case for a potential forecasting application (max 50 words). (e.g., underderstanding the ecological processes, advancing the ecological theory, use of forecasts to inform authorities, decision-making, conservation strategies, management)`,
         TRUE ~ NA_character_
       ),
       
@@ -98,7 +98,7 @@ data_library <- function(data) {
       # Forecasting horizon
       forecasting_horizon = if_else(
         grepl("Forecasting", project_type), 
-        as.character(`What is the forecasting horizon?`), 
+        as.character(`What is the forecasting horizon? (choose closest)`), 
         NA_character_
       ),
       
@@ -113,15 +113,15 @@ data_library <- function(data) {
   # Handle location and contact information
   transformed_data <- transformed_data %>%
     mutate(
-      research_location = `Please provide the coordinates of the research location. (Please use Google Maps: right-click on location on the map and copy coordinates)`,
+      research_location = `Please provide the coordinates of the research location (Please use Google Maps: right-click on location on the map and copy coordinates).\n(e.g. 60.294264172757536, 22.390893932124552)\nThese coordinates will be used to visualise your project on the map view, so provide coordinates that you think captures the project the best.`,
       forecast_location = `Please provide the forecast coordinates (if different).`,
       project_url = `Project URL (if available)`,
       interactive_url = `Interactive website URL (if available)`,
-      principal_investigator = `Who is the Principal Investigator (PI)?`,
-      contact_person = `Who is the main contact person?`,
+      principal_investigator = `Who is the Principal Investigator (PI) of the project?`,
+      contact_person = `Who is the main contact person for this form response? (If different from PI)`,
       contact_institute = `Contact institute`,
       contact_email = `Contact email`,
-      share_email = `Would you like us to share this contact email on our website, database and ShinnyApp?`,
+      share_email = `Would you like us to share this contact email on our website, database and ShinyApp?`,
       publications = `If any, associated publications (DOIs only)`,
       data_consent = `Data use consent:\nIf you choose the second option, please specify below what information you would prefer not to be shared.`,
       not_share_info = `Please specify what information you do not want us to share:`,

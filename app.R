@@ -1,5 +1,5 @@
 # app.R
-# EU Forecasting Applications Shiny App
+# EEFI European Ecological Forecasting Application Database Shiny App
 
 # Load required libraries
 library(shiny)
@@ -24,19 +24,21 @@ FORM_ID <- "https://docs.google.com/forms/d/e/1FAIpQLSc6qn_UQNvXDXNuc_lXgy9pfiyY
 
 # UI definition
 ui <- dashboardPage(
-  dashboardHeader(title = "EU Forecasting Applications", 
-                  titleWidth = 350),
+  dashboardHeader(title = "EEFI European Ecological Forecasting Application Database", 
+                  titleWidth = 550),
   
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Submit Application", tabName = "submit", icon = icon("edit")),
-      menuItem("View Applications", tabName = "view", icon = icon("table")),
-      menuItem("Map View", tabName = "map", icon = icon("map"))
+      menuItem("Home", tabName = "landing", icon = icon("home")),
+      menuItem("Glossary & FAQ", tabName = "glossary", icon = icon("book")),
+      menuItem("Map View", tabName = "map", icon = icon("map")),
+      menuItem("Table View", tabName = "view", icon = icon("table")),
+      menuItem("Submit Application", tabName = "submit", icon = icon("edit"))
     ),
     tags$style(HTML("
       .skin-blue .main-header .logo {
         background-color: #009688;
-        font-size: 22px;
+        font-size: 18px;
       }
       .skin-blue .main-header .logo:hover {
         background-color: #00897b;
@@ -120,30 +122,101 @@ ui <- dashboardPage(
           background-color: #009688;
           color: #fff;
         }
+        .landing-content {
+          text-align: center;
+          padding: 20px;
+        }
+        .landing-content h2 {
+          color: #009688;
+          margin-bottom: 30px;
+        }
+        .landing-content p {
+          font-size: 18px;
+          line-height: 1.6;
+          margin-bottom: 20px;
+          max-width: 800px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .eefi-logo {
+          max-width: 300px;
+          margin-bottom: 20px;
+        }
       "))
     ),
     tabItems(
-      # First tab - Form submission
+      # Landing tab
       tabItem(
-        tabName = "submit",
+        tabName = "landing",
         fluidRow(
           box(
-            title = "EU Forecasting Application Form",
+            title = "",
             width = 12,
-            # Embed Google Form
-            tags$iframe(
-              id = "googleform",
-              src = FORM_ID,
-              width = "100%",
-              height = 800,
-              frameborder = 0,
-              marginheight = 0
+            div(class = "landing-content",
+                # Placeholder for EEFI logo - replace with actual logo path
+                img(src = "eefi_logo.png", class = "eefi-logo", alt = "EEFI Logo"),
+                h2("European Ecological Forecasting Initiative"),
+                p("The European Ecological Forecasting Initiative (EEFI) Chapter is developing the first comprehensive database of ecological forecasting applications in Europe. This app showcases ongoing projects, models, and observatories with forecasting potential. You can explore existing submissions through interactive table and map views—or contribute your own!"),
+                p(tags$strong("Website: "), tags$a("https://euro-ecoforecast.wordpress.com/", href = "https://euro-ecoforecast.wordpress.com/", target = "_blank")),
+                p(tags$strong("Email: "), tags$a("info@ecoforecast.org", href = "mailto:info@ecoforecast.org")),
+                p(tags$strong("Connect: "), tags$a("https://euro-ecoforecast.wordpress.com/connect/", href = "https://euro-ecoforecast.wordpress.com/connect/", target = "_blank"))
+           )
+          )
+        )
+      ),
+      
+      # Glossary tab
+      tabItem(
+        tabName = "glossary",
+        fluidRow(
+          box(
+            title = "Glossary and Frequently Asked Questions",
+            width = 12,
+            div(
+              h3("What is an ecological forecast?"),
+              p("An ecological forecast is a specific, quantitative prediction about a future ecological state, preferably including an uncertainty estimate—such as species distributions, population sizes, or ecosystem functions—based on data and models. These forecasts help inform decision-making under changing environmental conditions."),
+              
+              h3("What is a near-term iterative forecast?"),
+              p("A near-term iterative forecast is a prediction made for the coming days, weeks, months, or years that is updated regularly as new data become available. These forecasts are typically evaluated and refined over time, improving their accuracy and utility for decision-making in real time."),
+              
+              h3("What is a modeling application with forecasting potential?"),
+              p("This refers to any ecological model that could be used to make predictions about the future, even if it hasn't yet been used operationally for forecasting. For a modeling application to become a forecasting application, it typically requires open-access models, accessible input data, and a continuous or regular flow of updated data to generate and refine forecasts over time."),
+              
+              h3("What is an observatory with forecasting potential?"),
+              p("An observatory with forecasting potential is a monitoring system or data-collection network that generates ecological or environmental data which could support future forecasts. This includes long-term ecological research sites, sensor networks, citizen science platforms, or remote sensing programs. If the data collected can be regularly updated and linked to models, the observatory can contribute to near-term iterative forecasting efforts."),
+              
+              h3("What is a forecasting horizon?"),
+              p("The forecasting horizon refers to the time period over which a forecast is made. It indicates how far into the future the model or prediction aims to project."),
+              
+              h3("Who is EEFI?"),
+              p("The European Ecological Forecasting Initiative (EEFI; ", tags$a("https://euro-ecoforecast.wordpress.com/", href = "https://euro-ecoforecast.wordpress.com/", target = "_blank"), ") is an open, collaborative network of researchers and practitioners working to advance ecological forecasting in Europe. Our goal is to promote transparency, coordination, and innovation across forecasting efforts and to build a central hub for sharing knowledge and resources."),
+              
+              h3("How will my form responses be used?"),
+              p("The information you provide will be reviewed and, if approved, included in EEFI's public database. This database will be featured on our website to highlight the diversity of ecological forecasting efforts across Europe. You can choose to limit what information is shared (see consent question in the form)."),
+              
+              h3("Can I change the form responses that I provided?"),
+              p("Yes! After submission, you can request to update or correct your entry at any time. Simply contact us via ", tags$strong(tags$a("info@ecoforecast.org", href = "mailto:info@ecoforecast.org"))),
+              
+              h3("Can I delete the form responses that I provided?"),
+              p("Absolutely. If you wish to withdraw your data from the database, simply contact us via ", tags$strong(tags$a("info@ecoforecast.org", href = "mailto:info@ecoforecast.org")))
             )
           )
         )
       ),
       
-      # Second tab - Applications table with filters
+      # Map view tab
+      tabItem(
+        tabName = "map",
+        fluidRow(
+          box(
+            title = "EEFI European Ecological Forecasting Application Database",
+            width = 12,
+            leafletOutput("applicationsMap", height = 700)
+          )
+        )
+      ),
+      
+      # Table view tab with filters
       tabItem(
         tabName = "view",
         fluidRow(
@@ -182,14 +255,22 @@ ui <- dashboardPage(
         )
       ),
       
-      # Third tab - Map view
+      # Submit application tab
       tabItem(
-        tabName = "map",
+        tabName = "submit",
         fluidRow(
           box(
-            title = "Applications Map",
+            title = "Application Form",
             width = 12,
-            leafletOutput("applicationsMap", height = 700)
+            # Embed Google Form
+            tags$iframe(
+              id = "googleform",
+              src = FORM_ID,
+              width = "100%",
+              height = 800,
+              frameborder = 0,
+              marginheight = 0
+            )
           )
         )
       )
