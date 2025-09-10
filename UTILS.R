@@ -83,7 +83,7 @@ data_library <- function(data) {
       # Use case
       use_case = case_when(
         grepl("Forecasting", project_type) ~ `Please provide an example use case for the forecasts (max 50 words). (e.g., use of forecasts to inform authorities, decision-making, conservation strategies, management)`,
-        grepl("Modeling", project_type) ~ `Please provide an example use case for a potential forecasting application (max 50 words). (e.g., underderstanding the ecological processes, advancing the ecological theory, use of forecasts to inform authorities, decision-making, conservation strategies, management)`,
+        grepl("Modeling", project_type) ~ `Please provide an example use case for a potential forecasting application (max 50 words). (e.g., understanding the ecological processes, advancing the ecological theory, use of forecasts to inform authorities, decision-making, conservation strategies, management)`,
         TRUE ~ NA_character_
       ),
       

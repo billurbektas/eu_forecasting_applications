@@ -156,7 +156,7 @@ ui <- dashboardPage(
                 # Placeholder for EEFI logo - replace with actual logo path
                 img(src = "eefi_logo.png", class = "eefi-logo", alt = "EEFI Logo"),
                 h2("European Ecological Forecasting Initiative"),
-                p("The European Ecological Forecasting Initiative (EEFI) Chapter is developing the first comprehensive database of ecological forecasting applications in Europe. This app showcases ongoing projects, models, and observatories with forecasting potential. You can explore existing submissions through interactive table and map views—or contribute your own!"),
+                p("The European Ecological Forecasting Initiative (EEFI) Chapter is developing the first comprehensive database of ecological forecasting applications in Europe. By “applications,” we mean real-world examples of forecasting projects, models, and observatories with forecasting potential. You can explore existing submissions through interactive table and map views—or contribute your own!"),
                 p(tags$strong("Website: "), tags$a("https://euro-ecoforecast.wordpress.com/", href = "https://euro-ecoforecast.wordpress.com/", target = "_blank")),
                 p(tags$strong("Email: "), tags$a("info@ecoforecast.org", href = "mailto:info@ecoforecast.org")),
                 p(tags$strong("Connect: "), tags$a("https://euro-ecoforecast.wordpress.com/connect/", href = "https://euro-ecoforecast.wordpress.com/connect/", target = "_blank"))
